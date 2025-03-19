@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c);
-            color: #fff;
-            text-align: center;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to bottom, #1a1a1a, #2c2c2c);
+    color: #fff;
+    text-align: center;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh; /* Добавляем минимальную высоту */
+}
 
         header {
             background: linear-gradient(to bottom, #2c2c2c, #1a1a1a);
@@ -368,7 +369,7 @@
     padding: 20px;
     background: linear-gradient(to top, #2c2c2c, #1a1a1a);
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
-    position: relative; /* Теперь футер будет прокручиваться вместе с контентом */
+    position: relative !important; /* Добавляем !important */
     width: 100%;
 }
 
