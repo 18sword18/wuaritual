@@ -21,13 +21,11 @@
 }
 
         header {
-            background: linear-gradient(to bottom, #2c2c2c, #1a1a1a);
-            padding: 20px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
+    background: linear-gradient(to bottom, #2c2c2c, #1a1a1a);
+    padding: 20px;
+    position: relative; /* Теперь хедер будет прокручиваться вместе с контентом */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
 
         .logo {
             font-size: 48px;
