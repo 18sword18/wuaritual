@@ -363,13 +363,14 @@
             margin: 20px auto;
             border-radius: 2px;
             box-shadow: 0 0 5px rgba(128, 0, 128, 0.5);
-        }
-
+            
         footer {
-            padding: 20px;
-            background: linear-gradient(to top, #2c2c2c, #1a1a1a);
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
-        }
+    padding: 20px;
+    background: linear-gradient(to top, #2c2c2c, #1a1a1a);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    position: relative; /* Теперь футер будет прокручиваться вместе с контентом */
+    width: 100%;
+}
 
         footer a {
             color: #ffcc00;
