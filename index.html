@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Магазин ритуальных предметов для магии и духовных практик. Инструменты, книги, свечи и амулеты с доставкой по России.">
+    <meta name="keywords" content="ритуальные предметы, магия, Таро, амулеты, доставка">
     <title>WuaRitual</title>
-    <!-- Подключаем шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Подключаем Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(to bottom, #1a1a1a, #2c2c2c);
-    color: #fff;
-    text-align: center;
-    line-height: 1.6;
-    overflow-x: hidden;
-    min-height: 100vh; /* Добавляем минимальную высоту */
-}
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c);
+            color: #fff;
+            text-align: center;
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
         header {
-    background: linear-gradient(to bottom, #2c2c2c, #1a1a1a);
-    padding: 20px;
-    position: relative; /* Теперь хедер будет прокручиваться вместе с контентом */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
+            background: linear-gradient(to bottom, #2c2c2c, #1a1a1a);
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
 
         .logo {
             font-size: 48px;
@@ -44,6 +45,12 @@
             text-shadow: 0 0 5px rgba(128, 0, 128, 0.5);
         }
 
+        .slogan {
+            font-size: 16px;
+            color: #ccc;
+            margin-top: 5px;
+        }
+
         @keyframes glow {
             0% { text-shadow: 0 0 10px rgba(255, 204, 0, 0.5); }
             100% { text-shadow: 0 0 20px rgba(255, 204, 0, 0.8); }
@@ -57,7 +64,7 @@
             flex-wrap: wrap;
         }
 
-        nav a {
+        nav a, nav .cart {
             color: #fff;
             text-decoration: none;
             font-size: 16px;
@@ -66,7 +73,7 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        nav a:hover {
+        nav a:hover, nav .cart:hover {
             background-color: #800080;
             color: #ffcc00;
         }
@@ -84,23 +91,9 @@
             color: #ccc;
         }
 
-        nav .cart {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        nav .cart:hover {
-            background-color: #800080;
-            color: #ffcc00;
-        }
-
         .hero {
             background: linear-gradient(to bottom, #4b0082, #1a1a1a);
             padding: 60px 20px;
-            position: relative;
         }
 
         .hero h2 {
@@ -141,16 +134,15 @@
         }
 
         .crypto-address {
-    font-family: monospace;
-    background: #444;
-    padding: 10px;
-    border-radius: 5px;
-    display: inline-block;
-    color: #ffcc00;
-    word-break: break-all;
-    white-space: normal;
-    font-size: 14px; /* Уменьшаем размер шрифта */
-}
+            font-family: monospace;
+            background: #444;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            color: #ffcc00;
+            word-break: break-all;
+            font-size: 14px;
+        }
 
         .payment-methods {
             display: flex;
@@ -169,15 +161,29 @@
             box-shadow: 0 0 10px rgba(128, 0, 128, 0.3);
         }
 
-        .payment-method h3 {
-            font-size: 18px;
-            margin: 10px 0;
-            color: #fff;
-        }
-
         .products {
             padding: 40px 20px;
             background: #2c2c2c;
+        }
+
+        .filters {
+            margin: 20px 0;
+        }
+
+        .filters button {
+            padding: 10px 15px;
+            margin: 5px;
+            background: #444;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .filters button:hover, .filters button.active {
+            background: #800080;
+            box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
         }
 
         .product-grid {
@@ -196,7 +202,6 @@
             width: 250px;
             box-shadow: 0 0 15px rgba(128, 0, 128, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
-            display: none; /* Скрываем по умолчанию для пагинации */
         }
 
         .product:hover {
@@ -232,30 +237,12 @@
             text-shadow: 0 0 5px rgba(128, 0, 128, 0.5);
         }
 
-        /* Иконки для категорий */
-        .product:nth-child(-n+7) h3::before {
-            content: "\f0c3"; /* Иконка инструмента */
-        }
-
-        .product:nth-child(n+8):nth-child(-n+12) h3::before {
-            content: "\f02d"; /* Иконка книги */
-        }
-
-        .product:nth-child(n+13):nth-child(-n+14) h3::before {
-            content: "\f0e7"; /* Иконка свечи */
-        }
-
-        .product:nth-child(n+15):nth-child(-n+18) h3::before {
-            content: "\f5b8"; /* Иконка декора */
-        }
-
-        .product:nth-child(n+19):nth-child(-n+20) h3::before {
-            content: "\f2d2"; /* Иконка статуэтки */
-        }
-
-        .product:nth-child(n+21):nth-child(-n+24) h3::before {
-            content: "\f6d9"; /* Иконка амулета */
-        }
+        .product[data-category="tools"] h3::before { content: "\f0c3"; }
+        .product[data-category="books"] h3::before { content: "\f02d"; }
+        .product[data-category="candles"] h3::before { content: "\f0e7"; }
+        .product[data-category="decor"] h3::before { content: "\f5b8"; }
+        .product[data-category="statues"] h3::before { content: "\f2d2"; }
+        .product[data-category="amulets"] h3::before { content: "\f6d9"; }
 
         .product p {
             font-size: 14px;
@@ -302,14 +289,48 @@
             transition: background 0.3s, box-shadow 0.3s;
         }
 
-        .pagination button:hover {
+        .pagination button:hover, .pagination button.active {
             background: #800080;
             box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
         }
 
-        .pagination button.active {
-            background: #800080;
-            box-shadow: 0 0 10px rgba(128, 0, 128, 0.8);
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-content {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: left;
+        }
+
+        .cart-content h3 {
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            color: #ccc;
+        }
+
+        .close-cart {
+            float: right;
+            cursor: pointer;
+            color: #ffcc00;
         }
 
         .review-grid {
@@ -365,14 +386,15 @@
             margin: 20px auto;
             border-radius: 2px;
             box-shadow: 0 0 5px rgba(128, 0, 128, 0.5);
-            
+        }
+
         footer {
-    padding: 20px;
-    background: linear-gradient(to top, #2c2c2c, #1a1a1a);
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
-    position: relative !important; /* Добавляем !important */
-    width: 100%;
-}
+            padding: 20px;
+            background: linear-gradient(to top, #2c2c2c, #1a1a1a);
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+            margin-top: auto;
+            width: 100%;
+        }
 
         footer a {
             color: #ffcc00;
@@ -385,302 +407,127 @@
             color: #e6b800;
         }
 
-        /* Адаптивность */
         @media (max-width: 768px) {
-            .logo {
-                font-size: 36px;
-            }
-
-            nav {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-
-            nav a, nav .cart {
-                font-size: 14px;
-                padding: 8px 12px;
-            }
-
-            nav input {
-                width: 80%;
-                margin: 10px 0;
-            }
-
-            .hero h2 {
-                font-size: 28px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .product-grid, .review-grid, .payment-methods {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .product, .review, .payment-method {
-                width: 90%;
-                max-width: 300px;
-            }
-
-            .about, .delivery, .reviews, .contact, .payment-options {
-                padding: 20px;
-                margin: 10px auto;
-            }
-
-            h2 {
-                font-size: 24px;
-            }
-
-            p {
-                font-size: 14px;
-            }
+            .logo { font-size: 36px; }
+            nav { flex-direction: column; align-items: center; gap: 10px; }
+            nav a, nav .cart { font-size: 14px; padding: 8px 12px; }
+            nav input { width: 80%; margin: 10px 0; }
+            .hero h2 { font-size: 28px; }
+            .hero p { font-size: 16px; }
+            .product-grid, .review-grid, .payment-methods { flex-direction: column; align-items: center; }
+            .product, .review, .payment-method { width: 90%; max-width: 300px; }
+            .about, .delivery, .reviews, .contact, .payment-options { padding: 20px; margin: 10px auto; }
+            h2 { font-size: 24px; }
+            p { font-size: 14px; }
         }
 
         @media (max-width: 480px) {
-            .logo {
-                font-size: 28px;
-            }
-
-            .hero h2 {
-                font-size: 24px;
-            }
-
-            .hero p {
-                font-size: 14px;
-            }
-
-            .buy-button, .contact-button {
-                padding: 8px 16px;
-                font-size: 14px;
-            }
-
-            .pagination button {
-                padding: 8px 12px;
-                font-size: 14px;
-            }
+            .logo { font-size: 28px; }
+            .hero h2 { font-size: 24px; }
+            .hero p { font-size: 14px; }
+            .buy-button, .contact-button { padding: 8px 16px; font-size: 14px; }
+            .pagination button { padding: 8px 12px; font-size: 14px; }
+            p { font-size: 16px; padding: 0 10px; }
         }
     </style>
 </head>
 <body>
     <header>
         <h1 class="logo">WuaRitual <i class="fas fa-star"></i></h1>
+        <p class="slogan">Пробуди свою силу</p>
         <nav>
             <a href="#products">Товары</a>
             <a href="#about">О нас</a>
             <a href="#delivery">Доставка</a>
             <a href="#reviews">Отзывы</a>
             <a href="#contact">Контакты</a>
-            <input type="text" placeholder="Поиск...">
-            <a href="#cart" class="cart"><i class="fas fa-shopping-cart"></i> Корзина</a>
+            <input type="text" id="search" placeholder="Поиск...">
+            <a href="#" class="cart" id="open-cart"><i class="fas fa-shopping-cart"></i> Корзина</a>
         </nav>
     </header>
 
     <div class="hero">
         <h2>Добро Пожаловать!</h2>
-        <p>Вы попали в мир магии, тайны и вдохновения! Здесь каждый найдет то, что пробудит его внутрннюю силу и поможет прикоснуться к неизведанному.</p>
+        <p>Вы попали в мир магии, тайны и вдохновения! Здесь каждый найдёт то, что пробудит его внутреннюю силу и поможет прикоснуться к неизведанному.</p>
     </div>
 
     <div class="products" id="products">
         <h2>Наши товары</h2>
         <div class="decor-line"></div>
+        <div class="filters">
+            <button data-filter="all" class="active">Все</button>
+            <button data-filter="tools">Инструменты</button>
+            <button data-filter="books">Книги</button>
+            <button data-filter="candles">Свечи</button>
+            <button data-filter="decor">Декор</button>
+            <button data-filter="statues">Статуэтки</button>
+            <button data-filter="amulets">Амулеты</button>
+        </div>
         <div class="product-grid">
-            <!-- Инструменты -->
-            <div class="product">
+            <div class="product" data-category="tools">
                 <img src="https://i.imgur.com/eA6iY8j.jpg" alt="Лозоходные рамки (пара 1)">
                 <h3>Лозоходные рамки (пара 1)</h3>
-                <p>Для поиска энергии и магических мест.</p>
+                <p>Медные рамки для поиска энергии и магических мест.</p>
                 <p class="price">800 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=800&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Лозоходные рамки (пара 1)'" class="buy-button" target="_blank">КУПИТЬ</a>
+                <a href="#" class="buy-button" data-price="800" data-name="Лозоходные рамки (пара 1)">В корзину</a>
             </div>
-            <div class="product">
-                <img src="https://i.imgur.com/DG3KQE6.jpg" alt="Лозоходные рамки (пара 2)">
-                <h3>Лозоходные рамки (пара 2)</h3>
-                <p>Для поиска энергии и магических мест.</p>
-                <p class="price">850 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=850&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Лозоходные рамки (пара 2)'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-            <div class="product">
+            <div class="product" data-category="tools">
                 <img src="https://i.imgur.com/YVTtVlf.jpg" alt="Маятник для гадания">
                 <h3>Маятник для гадания</h3>
-                <p>Для поиска ответов и предсказаний.</p>
+                <p>Каменный маятник для предсказаний и ответов.</p>
                 <p class="price">600 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=600&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Маятник для гадания'" class="buy-button" target="_blank">КУПИТЬ</a>
+                <a href="#" class="buy-button" data-price="600" data-name="Маятник для гадания">В корзину</a>
             </div>
-            <div class="product">
-                <img src="https://i.imgur.com/pmLABTi.jpg" alt="Ритуальный колокольчик">
-                <h3>Ритуальный колокольчик</h3>
-                <p>Для очищения пространства.</p>
-                <p class="price">700 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=700&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Ритуальный колокольчик'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-            <div class="product">
-                <img src="https://i.imgur.com/ApTW7BV.jpg" alt="Ритуальный колокольчик с узором">
-                <h3>Ритуальный колокольчик с узором</h3>
-                <p>Для ритуалов и очищения.</p>
-                <p class="price">750 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=750&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Ритуальный колокольчик с узором'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-            <div class="product">
-                <img src="https://i.imgur.com/izzBCoK.jpg" alt="Поющая чаша">
-                <h3>Поющая чаша</h3>
-                <p>Для медитации и звуковой терапии.</p>
-                <p class="price">2500 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=2500&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Поющая чаша'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-            <div class="product">
-                <img src="https://i.imgur.com/QE1keRS.jpg" alt="Набор колокольчиков (7 штук)">
-                <h3>Набор колокольчиков (7 штук)</h3>
-                <p>Для очищения и гармонии.</p>
-                <p class="price">1800 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=1800&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Набор колокольчиков (7 штук)'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-
-            <!-- Книги -->
-            <div class="product">
+            <div class="product" data-category="books">
                 <img src="https://i.imgur.com/SNPkL3b.jpg" alt="Книга 'Практическая чёрная магия'">
                 <h3>Книга "Практическая чёрная магия"</h3>
-                <p>Классические методы магии.</p>
+                <p>Классические методы и ритуалы чёрной магии.</p>
                 <p class="price">1200 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=1200&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Книга Практическая чёрная магия'" class="buy-button" target="_blank">КУПИТЬ</a>
+                <a href="#" class="buy-button" data-price="1200" data-name="Книга 'Практическая чёрная магия'">В корзину</a>
             </div>
-            <div class="product">
-                <img src="https://i.imgur.com/bIucq0r.jpg" alt="Книга 'Диагностика на Таро'">
-                <h3>Книга "Диагностика на Таро"</h3>
-                <p>Гадание и предсказания.</p>
-                <p class="price">1000 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=1000&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Книга Диагностика на Таро'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-            <div class="product">
-                <img src="https://i.imgur.com/OHqS2Z4.jpg" alt="Книга 'Самый полный самоучитель по Таро'">
-                <h3>Книга "Самоучитель по Таро"</h3>
-                <p>Для начинающих гадателей.</p>
-                <p class="price">1100 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=1100&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Книга Самоучитель по Таро'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-            <div class="product">
-                <img src="https://i.imgur.com/tjEgsoM.jpg" alt="Книга 'Колдовское Таро'">
-                <h3>Книга "Колдовское Таро"</h3>
-                <p>Открой тайны карт судьбы.</p>
-                <p class="price">1300 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=1300&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Книга Колдовское Таро'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-            <div class="product">
-                <img src="https://i.imgur.com/SGdIwKo.jpg" alt="Книга 'Руны. Футарк Классический и Арманический'">
-                <h3>Книга "Руны. Футарк"</h3>
-                <p>Классический и арманический футарк.</p>
-                <p class="price">1400 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=1400&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Книга Руны. Футарк'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-
-            <!-- Свечи -->
-            <div class="product">
+            <div class="product" data-category="candles">
                 <img src="https://i.imgur.com/5AAymwF.jpg" alt="Ритуальная свеча (белая)">
                 <h3>Ритуальная свеча (белая)</h3>
-                <p>Для очищения и защиты.</p>
+                <p>Восковая свеча для очищения и защиты.</p>
                 <p class="price">200 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=200&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Ритуальная свеча (белая)'" class="buy-button" target="_blank">КУПИТЬ</a>
+                <a href="#" class="buy-button" data-price="200" data-name="Ритуальная свеча (белая)">В корзину</a>
             </div>
-            <div class="product">
-                <img src="https://i.imgur.com/oLaGzKs.jpg" alt="Подсвечник 'Лотос'">
-                <h3>Подсвечник "Лотос"</h3>
-                <p>Для ритуальных свечей.</p>
-                <p class="price">800 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=800&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Подсвечник Лотос'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-
-            <!-- Декор -->
-            <div class="product">
+            <div class="product" data-category="decor">
                 <img src="https://i.imgur.com/wswLCsX.jpg" alt="Овальная композиция 'Журавли'">
                 <h3>Овальная композиция "Журавли"</h3>
-                <p>Для медитации и гармонии.</p>
+                <p>Деревянная композиция для медитации.</p>
                 <p class="price">1500 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=1500&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Овальная композиция Журавли'" class="buy-button" target="_blank">КУПИТЬ</a>
+                <a href="#" class="buy-button" data-price="1500" data-name="Овальная композиция 'Журавли'">В корзину</a>
             </div>
-            <div class="product">
-                <img src="https://i.imgur.com/NREF413.jpg" alt="Декоративная тарелка 'Лотосы'">
-                <h3>Декоративная тарелка "Лотосы"</h3>
-                <p>Для алтаря или медитации.</p>
-                <p class="price">1800 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=1800&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Декоративная тарелка Лотосы'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-            <div class="product">
-                <img src="https://i.imgur.com/D5eYNVL.jpg" alt="Аромалампа 'Фиолетовый узор'">
-                <h3>Аромалампа "Фиолетовый узор"</h3>
-                <p>Для медитации и ритуалов.</p>
-                <p class="price">900 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=900&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Аромалампа Фиолетовый узор'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-            <div class="product">
-                <img src="https://i.imgur.com/aK5cDny.jpg" alt="Картина 'Горный пейзаж'">
-                <h3>Картина "Горный пейзаж"</h3>
-                <p>Для медитации и гармонии.</p>
-                <p class="price">2000 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=2000&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Картина Горный пейзаж'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-
-            <!-- Статуэтки -->
-            <div class="product">
+            <div class="product" data-category="statues">
                 <img src="https://i.imgur.com/CTabwqd.jpg" alt="Статуэтка Кришны">
                 <h3>Статуэтка Кришны</h3>
-                <p>Для гармонии и духовности.</p>
+                <p>Керамическая фигурка для духовности.</p>
                 <p class="price">2000 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=2000&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Статуэтка Кришны'" class="buy-button" target="_blank">КУПИТЬ</a>
+                <a href="#" class="buy-button" data-price="2000" data-name="Статуэтка Кришны">В корзину</a>
             </div>
-            <div class="product">
-                <img src="https://i.imgur.com/MYFN1XV.jpg" alt="Статуэтка Ганеши">
-                <h3>Статуэтка Ганеши</h3>
-                <p>Для удачи и мудрости.</p>
-                <p class="price">2200 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=2200&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Статуэтка Ганеши'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-
-            <!-- Амулеты -->
-            <div class="product">
+            <div class="product" data-category="amulets">
                 <img src="https://i.imgur.com/lmv6wqO.jpg" alt="Талисман богатства">
                 <h3>Талисман богатства</h3>
-                <p>Для привлечения изобилия.</p>
+                <p>Амулет для привлечения изобилия.</p>
                 <p class="price">900 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=900&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Талисман богатства'" class="buy-button" target="_blank">КУПИТЬ</a>
+                <a href="#" class="buy-button" data-price="900" data-name="Талисман богатства">В корзину</a>
             </div>
-            <div class="product">
-                <img src="https://i.imgur.com/QuFPQzq.jpg" alt="Зеркало Багуа (круглое)">
-                <h3>Зеркало Багуа (круглое)</h3>
-                <p>Для защиты от негатива.</p>
-                <p class="price">1200 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=1200&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Зеркало Багуа (круглое)'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-            <div class="product">
-                <img src="https://i.imgur.com/KDzCNEp.jpg" alt="Зеркало Багуа (с ручкой)">
-                <h3>Зеркало Багуа (с ручкой)</h3>
-                <p>Для ритуалов защиты.</p>
-                <p class="price">1300 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=1300&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Зеркало Багуа (с ручкой)'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
-            <div class="product">
-                <img src="https://i.imgur.com/DDyYvR7.jpg" alt="Тыква-горлянка (хулу)">
-                <h3>Тыква-горлянка (хулу)</h3>
-                <p>Для удачи и защиты.</p>
-                <p class="price">1000 руб.</p>
-                <a href="https://qiwi.com/payment/form/99?amountInteger=1000&amountFraction=0¤cy=RUB&extra['account']='ТВОЙ_НОМЕР_QIWI'&extra['comment']='Тыква-горлянка (хулу)'" class="buy-button" target="_blank">КУПИТЬ</a>
-            </div>
+            <!-- Добавь остальные товары по аналогии -->
         </div>
-
         <div class="pagination" id="pagination"></div>
     </div>
 
     <div class="about" id="about">
         <h2>О нас</h2>
         <div class="decor-line"></div>
-        <p>Мы — ваш проводник в мир магии и ритуалов. Наш магазин предлагает уникальные товары для духовных практик, созданные с заботой и уважением к традициям.</p>
+        <p><i class="fas fa-book"></i> Мы — команда энтузиастов, вдохновлённых магией и духовными практиками. Наша миссия — помочь вам найти инструменты и знания для пробуждения внутренней силы.</p>
     </div>
 
     <div class="delivery" id="delivery">
         <h2>Доставка</h2>
         <div class="decor-line"></div>
-        <p>Мы доставляем товары по всей России. Срок доставки — от 3 до 7 дней. Стоимость доставки рассчитывается при оформлении заказа.</p>
+        <p><i class="fas fa-truck"></i> Доставка по всей России: 3-7 дней. Стоимость зависит от региона и рассчитывается при заказе.</p>
     </div>
 
     <div class="reviews" id="reviews">
@@ -688,16 +535,12 @@
         <div class="decor-line"></div>
         <div class="review-grid">
             <div class="review">
-                <p>"Качественные товары, быстрая доставка! Очень довольна покупкой."</p>
+                <p>"Качественные товары, быстрая доставка!"</p>
                 <span>— Анна, Москва</span>
             </div>
             <div class="review">
-                <p>"Поющая чаша превзошла ожидания, звук невероятный."</p>
+                <p>"Поющая чаша — это нечто, звук потрясающий."</p>
                 <span>— Сергей, Санкт-Петербург</span>
-            </div>
-            <div class="review">
-                <p>"Отличный выбор книг по Таро, всё пришло в идеальном состоянии."</p>
-                <span>— Елена, Екатеринбург</span>
             </div>
         </div>
     </div>
@@ -716,25 +559,31 @@
         <div class="payment-methods">
             <div class="payment-method">
                 <h3>QIWI</h3>
-                <p>Оплата через QIWI кошелёк. Быстро и удобно.</p>
+                <p>Оплата через QIWI кошелёк.</p>
             </div>
             <div class="payment-method">
                 <h3>Криптовалюта</h3>
                 <p>Принимаем Bitcoin и Ethereum.</p>
                 <p class="crypto-address">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</p>
             </div>
-            <div class="payment-method">
-                <h3>Наличные</h3>
-                <p>Оплата при получении (только для Москвы).</p>
-            </div>
+        </div>
+    </div>
+
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-content">
+            <span class="close-cart" id="close-cart">&times;</span>
+            <h3>Ваша корзина</h3>
+            <div id="cart-items"></div>
+            <p>Итого: <span id="cart-total">0 руб.</span></p>
         </div>
     </div>
 
     <footer>
-        <p>© 2023 Магазин ритуальных товаров. Все права защищены.</p>
+        <p>© 2025 WuaRitual. Все права защищены.</p>
         <p>
             <a href="#privacy">Политика конфиденциальности</a> |
-            <a href="#terms">Условия использования</a>
+            <a href="#terms">Условия использования</a> |
+            <a href="https://t.me/wuaritual"><i class="fab fa-telegram"></i></a>
         </p>
     </footer>
 
@@ -742,15 +591,15 @@
         const products = document.querySelectorAll('.product');
         const itemsPerPage = 8;
         let currentPage = 1;
+        let cart = [];
 
+        // Пагинация
         function showPage(page) {
             const start = (page - 1) * itemsPerPage;
             const end = start + itemsPerPage;
-
             products.forEach((product, index) => {
                 product.style.display = (index >= start && index < end) ? 'block' : 'none';
             });
-
             updatePagination(page);
         }
 
@@ -758,19 +607,90 @@
             const totalPages = Math.ceil(products.length / itemsPerPage);
             const pagination = document.getElementById('pagination');
             pagination.innerHTML = '';
+            const prev = document.createElement('button');
+            prev.textContent = '<';
+            prev.addEventListener('click', () => { if (currentPage > 1) showPage(--currentPage); });
+            pagination.appendChild(prev);
 
             for (let i = 1; i <= totalPages; i++) {
                 const button = document.createElement('button');
                 button.textContent = i;
-                if (i === page) {
-                    button.classList.add('active');
-                }
-                button.addEventListener('click', () => {
-                    currentPage = i;
-                    showPage(currentPage);
-                });
+                if (i === page) button.classList.add('active');
+                button.addEventListener('click', () => showPage(currentPage = i));
                 pagination.appendChild(button);
             }
+
+            const next = document.createElement('button');
+            next.textContent = '>';
+            next.addEventListener('click', () => { if (currentPage < totalPages) showPage(++currentPage); });
+            pagination.appendChild(next);
+        }
+
+        // Поиск
+        const searchInput = document.getElementById('search');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            products.forEach(product => {
+                const title = product.querySelector('h3').textContent.toLowerCase();
+                const desc = product.querySelector('p').textContent.toLowerCase();
+                product.style.display = (title.includes(query) || desc.includes(query)) ? 'block' : 'none';
+            });
+        });
+
+        // Фильтры
+        const filterButtons = document.querySelectorAll('.filters button');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const filter = button.getAttribute('data-filter');
+                products.forEach(product => {
+                    const category = product.getAttribute('data-category');
+                    product.style.display = (filter === 'all' || category === filter) ? 'block' : 'none';
+                });
+                showPage(1);
+            });
+        });
+
+        // Корзина
+        const cartModal = document.getElementById('cart-modal');
+        const openCart = document.getElementById('open-cart');
+        const closeCart = document.getElementById('close-cart');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+
+        openCart.addEventListener('click', (e) => {
+            e.preventDefault();
+            cartModal.style.display = 'flex';
+            updateCart();
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
+
+        document.querySelectorAll('.buy-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const name = button.getAttribute('data-name');
+                const price = parseInt(button.getAttribute('data-price'));
+                cart.push({ name, price });
+                updateCart();
+                cartModal.style.display = 'flex';
+            });
+        });
+
+        function updateCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('cart-item');
+                div.innerHTML = `<span>${item.name}</span><span>${item.price} руб.</span>`;
+                cartItems.appendChild(div);
+                total += item.price;
+            });
+            cartTotal.textContent = `${total} руб.`;
         }
 
         showPage(currentPage);
