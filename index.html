@@ -310,15 +310,19 @@
         }
 
         .product {
-            background: linear-gradient(135deg, #333, #222);
-            border-radius: 15px;
-            padding: 25px;
-            width: 280px;
-            box-shadow: 0 0 20px rgba(128, 0, 128, 0.4);
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
+    background: linear-gradient(135deg, #333, #222);
+    border-radius: 15px;
+    padding: 25px;
+    width: 280px;
+    box-shadow: 0 0 20px rgba(128, 0, 128, 0.4);
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 450px; /* Добавляем минимальную высоту для карточки */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Распределяем содержимое, чтобы кнопка была внизу */
+}
 
         .product::before {
             content: '';
@@ -383,20 +387,21 @@
         }
 
         .buy-button {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(45deg, #800080, #ffcc00);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 25px;
-            margin-top: 15px;
-            font-weight: bold;
-            transition: all 0.4s ease;
-            box-shadow: 0 0 15px rgba(128, 0, 128, 0.6);
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(45deg, #800080, #ffcc00);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 15px rgba(128, 0, 128, 0.6);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    align-self: center; /* Центрируем кнопку */
+    margin-top: auto; /* Прижимаем кнопку к низу карточки */
+}
 
         .buy-button::after {
             content: '';
