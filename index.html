@@ -50,7 +50,56 @@
             z-index: 10;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(5px);
-            /* Убираем position: sticky, чтобы хедер прокручивался */
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+            opacity: 0.2;
+            z-index: -1;
+            animation: starField 50s linear infinite;
+        }
+
+        @keyframes starField {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 1000px; }
+        }
+
+        .header-decor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .header-decor span {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #ffcc00;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+            animation: twinkle 3s infinite;
+        }
+
+        .header-decor span:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .header-decor span:nth-child(2) { top: 30%; left: 80%; animation-delay: 1s; }
+        .header-decor span:nth-child(3) { top: 70%; left: 20%; animation-delay: 0.5s; }
+        .header-decor span:nth-child(4) { top: 50%; left: 90%; animation-delay: 2s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
         }
 
         .logo {
@@ -62,6 +111,8 @@
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 15px rgba(255, 204, 0, 0.7), 0 0 30px rgba(255, 204, 0, 0.3);
             animation: logoGlow 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
         }
 
         .logo i {
@@ -86,6 +137,8 @@
             color: #b3b3b3;
             margin-top: 10px;
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
         }
 
         nav {
@@ -94,6 +147,8 @@
             gap: 25px;
             padding: 15px 0;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
         }
 
         nav a, nav .cart {
@@ -160,6 +215,7 @@
             align-items: center;
             justify-content: center;
             min-height: 500px;
+            overflow: hidden;
         }
 
         .hero::before {
@@ -173,9 +229,22 @@
             z-index: 1;
         }
 
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+            opacity: 0.3;
+            z-index: 2;
+            animation: starField 30s linear infinite;
+        }
+
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             max-width: 600px;
             padding: 20px;
         }
@@ -528,6 +597,12 @@
 </head>
 <body>
     <header>
+        <div class="header-decor">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <h1 class="logo">WuaRitual <i class="fas fa-star"></i></h1>
         <p class="slogan">Ваш путь в мир магии</p>
         <nav>
