@@ -3,134 +3,458 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Магазин ритуальных предметов для магии и духовных практик. Инструменты, книги, свечи и амулеты с доставкой по России.">
-    <meta name="keywords" content="ритуальные предметы, магия, Таро, амулеты, доставка">
+    <meta name="description" content="WuaRitual — магазин ритуальных предметов для магии и духовных практик. Погрузитесь в мир тайны и силы.">
+    <meta name="keywords" content="ритуалы, магия, Таро, амулеты, свечи, доставка">
     <title>WuaRitual</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        body {
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c);
-            color: #fff;
-            text-align: center;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+            color: #e6e6e6;
+            line-height: 1.8;
             overflow-x: hidden;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(128, 0, 128, 0.1), transparent 70%);
+            z-index: -1;
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
 
         header {
-            background: linear-gradient(to bottom, #2c2c2c, #1a1a1a);
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to bottom, rgba(26, 26, 26, 0.9), rgba(0, 0, 0, 0.8));
+            padding: 30px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
         }
 
         .logo {
-            font-size: 48px;
             font-family: 'Cinzel', serif;
-            margin: 0;
-            letter-spacing: 2px;
-            background: linear-gradient(45deg, #ffcc00, #e6b800);
+            font-size: 60px;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, #ffcc00, #ff9900, #ffcc00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
-            animation: glow 2s infinite alternate;
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.7), 0 0 30px rgba(255, 204, 0, 0.3);
+            animation: logoGlow 3s ease-in-out infinite;
         }
 
         .logo i {
             color: #800080;
-            text-shadow: 0 0 5px rgba(128, 0, 128, 0.5);
+            text-shadow: 0 0 10px rgba(128, 0, 128, 0.8);
+            animation: starTwinkle 2s infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { text-shadow: 0 0 15px rgba(255, 204, 0, 0.7), 0 0 30px rgba(255, 204, 0, 0.3); }
+            50% { text-shadow: 0 0 25px rgba(255, 204, 0, 0.9), 0 0 50px rgba(255, 204, 0, 0.5); }
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .slogan {
-            font-size: 16px;
-            color: #ccc;
-            margin-top: 5px;
-        }
-
-        @keyframes glow {
-            0% { text-shadow: 0 0 10px rgba(255, 204, 0, 0.5); }
-            100% { text-shadow: 0 0 20px rgba(255, 204, 0, 0.8); }
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #b3b3b3;
+            margin-top: 10px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
         }
 
         nav {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            padding: 10px 0;
+            gap: 25px;
+            padding: 15px 0;
             flex-wrap: wrap;
         }
 
         nav a, nav .cart {
-            color: #fff;
+            color: #e6e6e6;
             text-decoration: none;
             font-size: 16px;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
+            padding: 12px 20px;
+            border-radius: 25px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::after, nav .cart::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(128, 0, 128, 0.8), transparent);
+            transition: all 0.4s ease;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        nav a:hover::after, nav .cart:hover::after {
+            width: 200%;
+            height: 200%;
         }
 
         nav a:hover, nav .cart:hover {
-            background-color: #800080;
             color: #ffcc00;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
         }
 
         nav input {
-            padding: 8px;
-            margin: 0 10px;
+            padding: 10px 15px;
             border: none;
-            border-radius: 5px;
-            background-color: #444;
+            border-radius: 25px;
+            background: rgba(68, 68, 68, 0.7);
             color: #fff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        nav input:focus {
+            outline: none;
+            background: rgba(68, 68, 68, 1);
+            box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
         }
 
         nav input::placeholder {
-            color: #ccc;
+            color: #b3b3b3;
         }
 
         .hero {
-            background: linear-gradient(to bottom, #4b0082, #1a1a1a);
-            padding: 60px 20px;
+            background: linear-gradient(135deg, #2b0047, #0d0d0d);
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.1), transparent 70%);
+            animation: heroGlow 10s infinite;
+            z-index: 0;
+        }
+
+        @keyframes heroGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .hero h2 {
-            font-size: 36px;
-            margin: 0;
             font-family: 'Cinzel', serif;
+            font-size: 48px;
+            color: #ffcc00;
+            text-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #d9d9d9;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .products {
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c);
+            position: relative;
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            color: #ffcc00;
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
+            margin-bottom: 30px;
+        }
+
+        .decor-line {
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(to right, #800080, #ffcc00);
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(128, 0, 128, 0.7);
+            animation: lineGlow 4s infinite;
+        }
+
+        @keyframes lineGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(128, 0, 128, 0.7); }
+            50% { box-shadow: 0 0 25px rgba(255, 204, 0, 0.9); }
+        }
+
+        .product-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product {
+            background: linear-gradient(135deg, #333, #222);
+            border-radius: 15px;
+            padding: 25px;
+            width: 280px;
+            box-shadow: 0 0 20px rgba(128, 0, 128, 0.4);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.2), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+
+        .product:hover::before {
+            opacity: 1;
+        }
+
+        .product:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 0 40px rgba(128, 0, 128, 0.8);
+        }
+
+        .product img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product:hover img {
+            transform: scale(1.1);
+        }
+
+        .product h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #fff;
+            margin: 15px 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .product p {
+            font-size: 14px;
+            color: #d9d9d9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #ffcc00;
+            font-size: 18px;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .buy-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #800080, #ffcc00);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 15px rgba(128, 0, 128, 0.6);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .buy-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.8), transparent);
+            transition: all 0.4s ease;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .buy-button:hover::after {
+            width: 200%;
+            height: 200%;
+        }
+
+        .buy-button:hover {
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.9);
+        }
+
+        .pagination {
+            margin: 30px 0;
+        }
+
+        .pagination button {
+            padding: 12px 18px;
+            margin: 0 8px;
+            background: linear-gradient(45deg, #444, #333);
+            border: none;
+            color: #fff;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(128, 0, 128, 0.4);
+        }
+
+        .pagination button:hover, .pagination button.active {
+            background: linear-gradient(45deg, #800080, #ffcc00);
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+        }
+
+        .about, .delivery, .reviews, .contact, .payment-options {
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #222, #333);
+            margin: 30px auto;
+            max-width: 1400px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .review-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .review {
+            background: linear-gradient(135deg, #333, #222);
+            border-radius: 15px;
+            padding: 25px;
+            width: 280px;
+            box-shadow: 0 0 20px rgba(128, 0, 128, 0.4);
+            transition: all 0.5s ease;
+        }
+
+        .review:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(128, 0, 128, 0.8);
+        }
+
+        .review p {
+            font-style: italic;
+            color: #d9d9d9;
+        }
+
+        .review span {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
             color: #ffcc00;
             text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
         }
 
-        .hero p {
+        .contact-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #ffcc00, #e6b800);
+            color: #1a1a1a;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
+        }
+
+        .contact-button:hover {
+            background: linear-gradient(45deg, #e6b800, #ffcc00);
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.9);
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .payment-method {
+            background: linear-gradient(135deg, #333, #222);
+            border-radius: 15px;
+            padding: 25px;
+            width: 300px;
+            box-shadow: 0 0 20px rgba(128, 0, 128, 0.4);
+            transition: all 0.5s ease;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(128, 0, 128, 0.8);
+        }
+
+        .payment-method h3 {
+            font-family: 'Playfair Display', serif;
             font-size: 20px;
-            margin: 10px 0;
-            color: #ccc;
-        }
-
-        .about, .delivery, .reviews, .contact, .payment-options {
-            padding: 40px 20px;
-            background: #333;
-            margin: 20px auto;
-            max-width: 1200px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        }
-
-        h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: #ffcc00;
-            font-family: 'Cinzel', serif;
-            text-shadow: 0 0 5px rgba(255, 204, 0, 0.3);
-        }
-
-        p {
-            font-size: 16px;
-            margin: 10px 0;
-            color: #ccc;
+            color: #fff;
+            margin-bottom: 15px;
         }
 
         .crypto-address {
@@ -138,303 +462,65 @@
             background: #444;
             padding: 10px;
             border-radius: 5px;
-            display: inline-block;
             color: #ffcc00;
             word-break: break-all;
             font-size: 14px;
         }
 
-        .payment-methods {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .payment-method {
-            background: #444;
-            border-radius: 10px;
-            padding: 20px;
-            width: 300px;
-            box-shadow: 0 0 10px rgba(128, 0, 128, 0.3);
-        }
-
-        .products {
-            padding: 40px 20px;
-            background: #2c2c2c;
-        }
-
-        .filters {
-            margin: 20px 0;
-        }
-
-        .filters button {
-            padding: 10px 15px;
-            margin: 5px;
-            background: #444;
-            border: none;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s, box-shadow 0.3s;
-        }
-
-        .filters button:hover, .filters button.active {
-            background: #800080;
-            box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
-        }
-
-        .product-grid {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .product {
-            background: #444;
-            border-radius: 10px;
-            padding: 20px;
-            width: 250px;
-            box-shadow: 0 0 15px rgba(128, 0, 128, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .product:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 20px rgba(128, 0, 128, 0.7);
-        }
-
-        .product img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 5px;
-            transition: transform 0.3s;
-        }
-
-        .product img:hover {
-            transform: scale(1.05);
-        }
-
-        .product h3 {
-            font-size: 18px;
-            margin: 10px 0;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .product h3::before {
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            color: #800080;
-            text-shadow: 0 0 5px rgba(128, 0, 128, 0.5);
-        }
-
-        .product[data-category="tools"] h3::before { content: "\f0c3"; }
-        .product[data-category="books"] h3::before { content: "\f02d"; }
-        .product[data-category="candles"] h3::before { content: "\f0e7"; }
-        .product[data-category="decor"] h3::before { content: "\f5b8"; }
-        .product[data-category="statues"] h3::before { content: "\f2d2"; }
-        .product[data-category="amulets"] h3::before { content: "\f6d9"; }
-
-        .product p {
-            font-size: 14px;
-            margin: 5px 0;
-            color: #ccc;
-        }
-
-        .price {
-            font-weight: bold;
-            color: #ffcc00;
-            font-size: 16px;
-        }
-
-        .buy-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background: linear-gradient(45deg, #800080, #4b0082);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-weight: bold;
-            transition: background 0.3s, box-shadow 0.3s;
-            box-shadow: 0 0 5px rgba(128, 0, 128, 0.5);
-        }
-
-        .buy-button:hover {
-            background: linear-gradient(45deg, #6a006a, #3a0062);
-            box-shadow: 0 0 15px rgba(128, 0, 128, 0.8);
-        }
-
-        .pagination {
-            margin: 20px 0;
-        }
-
-        .pagination button {
-            padding: 10px 15px;
-            margin: 0 5px;
-            background: #444;
-            border: none;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s, box-shadow 0.3s;
-        }
-
-        .pagination button:hover, .pagination button.active {
-            background: #800080;
-            box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
-        }
-
-        .cart-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .cart-content {
-            background: #333;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            text-align: left;
-        }
-
-        .cart-content h3 {
-            color: #ffcc00;
-            margin-bottom: 20px;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            margin: 10px 0;
-            color: #ccc;
-        }
-
-        .close-cart {
-            float: right;
-            cursor: pointer;
-            color: #ffcc00;
-        }
-
-        .review-grid {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .review {
-            background: #444;
-            border-radius: 10px;
-            padding: 20px;
-            width: 250px;
-            box-shadow: 0 0 10px rgba(128, 0, 128, 0.3);
-        }
-
-        .review p {
-            font-style: italic;
-        }
-
-        .review span {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-            color: #ffcc00;
-        }
-
-        .contact-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background: linear-gradient(45deg, #ffcc00, #e6b800);
-            color: #1a1a1a;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-weight: bold;
-            transition: background 0.3s, box-shadow 0.3s;
-            box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
-        }
-
-        .contact-button:hover {
-            background: linear-gradient(45deg, #e6b800, #d4a700);
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
-        }
-
-        .decor-line {
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(to right, #800080, #ffcc00);
-            margin: 20px auto;
-            border-radius: 2px;
-            box-shadow: 0 0 5px rgba(128, 0, 128, 0.5);
-        }
-
         footer {
-            padding: 20px;
-            background: linear-gradient(to top, #2c2c2c, #1a1a1a);
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            background: linear-gradient(to top, #1a1a1a, #2c2c2c);
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.7);
             margin-top: auto;
             width: 100%;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: #b3b3b3;
         }
 
         footer a {
             color: #ffcc00;
             text-decoration: none;
-            margin: 0 10px;
-            transition: color 0.3s;
+            margin: 0 15px;
+            transition: all 0.3s ease;
         }
 
         footer a:hover {
             color: #e6b800;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
         }
 
         @media (max-width: 768px) {
-            .logo { font-size: 36px; }
-            nav { flex-direction: column; align-items: center; gap: 10px; }
-            nav a, nav .cart { font-size: 14px; padding: 8px 12px; }
+            .logo { font-size: 48px; }
+            .slogan { font-size: 16px; }
+            nav { gap: 15px; }
+            nav a, nav .cart { font-size: 14px; padding: 10px 15px; }
             nav input { width: 80%; margin: 10px 0; }
-            .hero h2 { font-size: 28px; }
-            .hero p { font-size: 16px; }
-            .product-grid, .review-grid, .payment-methods { flex-direction: column; align-items: center; }
+            .hero { padding: 60px 20px; }
+            .hero h2 { font-size: 36px; }
+            .hero p { font-size: 18px; }
+            .product-grid, .review-grid, .payment-methods { gap: 20px; }
             .product, .review, .payment-method { width: 90%; max-width: 300px; }
-            .about, .delivery, .reviews, .contact, .payment-options { padding: 20px; margin: 10px auto; }
-            h2 { font-size: 24px; }
-            p { font-size: 14px; }
+            .about, .delivery, .reviews, .contact, .payment-options { padding: 40px 20px; margin: 20px auto; }
+            h2 { font-size: 28px; }
         }
 
         @media (max-width: 480px) {
-            .logo { font-size: 28px; }
-            .hero h2 { font-size: 24px; }
-            .hero p { font-size: 14px; }
-            .buy-button, .contact-button { padding: 8px 16px; font-size: 14px; }
-            .pagination button { padding: 8px 12px; font-size: 14px; }
-            p { font-size: 16px; padding: 0 10px; }
+            .logo { font-size: 36px; }
+            .slogan { font-size: 14px; }
+            .hero h2 { font-size: 28px; }
+            .hero p { font-size: 16px; }
+            .buy-button, .contact-button { padding: 10px 20px; font-size: 14px; }
+            .pagination button { padding: 10px 15px; font-size: 14px; }
         }
     </style>
 </head>
 <body>
     <header>
         <h1 class="logo">WuaRitual <i class="fas fa-star"></i></h1>
-        <p class="slogan">Пробуди свою силу</p>
+        <p class="slogan">Ваш путь в мир магии</p>
         <nav>
             <a href="#products">Товары</a>
             <a href="#about">О нас</a>
@@ -442,78 +528,187 @@
             <a href="#reviews">Отзывы</a>
             <a href="#contact">Контакты</a>
             <input type="text" id="search" placeholder="Поиск...">
-            <a href="#" class="cart" id="open-cart"><i class="fas fa-shopping-cart"></i> Корзина</a>
+            <a href="#" class="cart"><i class="fas fa-shopping-cart"></i> Корзина</a>
         </nav>
     </header>
 
     <div class="hero">
-        <h2>Добро Пожаловать!</h2>
-        <p>Вы попали в мир магии, тайны и вдохновения! Здесь каждый найдёт то, что пробудит его внутреннюю силу и поможет прикоснуться к неизведанному.</p>
+        <h2>Погрузитесь в Тайну</h2>
+        <p>Откройте для себя мир магии и ритуалов, где каждый предмет — ключ к вашей внутренней силе.</p>
     </div>
 
     <div class="products" id="products">
         <h2>Наши товары</h2>
         <div class="decor-line"></div>
-        <div class="filters">
-            <button data-filter="all" class="active">Все</button>
-            <button data-filter="tools">Инструменты</button>
-            <button data-filter="books">Книги</button>
-            <button data-filter="candles">Свечи</button>
-            <button data-filter="decor">Декор</button>
-            <button data-filter="statues">Статуэтки</button>
-            <button data-filter="amulets">Амулеты</button>
-        </div>
         <div class="product-grid">
-            <div class="product" data-category="tools">
+            <div class="product">
                 <img src="https://i.imgur.com/eA6iY8j.jpg" alt="Лозоходные рамки (пара 1)">
                 <h3>Лозоходные рамки (пара 1)</h3>
-                <p>Медные рамки для поиска энергии и магических мест.</p>
+                <p>Для поиска энергии и магических мест.</p>
                 <p class="price">800 руб.</p>
-                <a href="#" class="buy-button" data-price="800" data-name="Лозоходные рамки (пара 1)">В корзину</a>
+                <a href="#" class="buy-button">Купить</a>
             </div>
-            <div class="product" data-category="tools">
+            <div class="product">
+                <img src="https://i.imgur.com/DG3KQE6.jpg" alt="Лозоходные рамки (пара 2)">
+                <h3>Лозоходные рамки (пара 2)</h3>
+                <p>Для поиска энергии и магических мест.</p>
+                <p class="price">850 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
                 <img src="https://i.imgur.com/YVTtVlf.jpg" alt="Маятник для гадания">
                 <h3>Маятник для гадания</h3>
-                <p>Каменный маятник для предсказаний и ответов.</p>
+                <p>Для поиска ответов и предсказаний.</p>
                 <p class="price">600 руб.</p>
-                <a href="#" class="buy-button" data-price="600" data-name="Маятник для гадания">В корзину</a>
+                <a href="#" class="buy-button">Купить</a>
             </div>
-            <div class="product" data-category="books">
+            <div class="product">
+                <img src="https://i.imgur.com/pmLABTi.jpg" alt="Ритуальный колокольчик">
+                <h3>Ритуальный колокольчик</h3>
+                <p>Для очищения пространства.</p>
+                <p class="price">700 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
+                <img src="https://i.imgur.com/ApTW7BV.jpg" alt="Ритуальный колокольчик с узором">
+                <h3>Ритуальный колокольчик с узором</h3>
+                <p>Для ритуалов и очищения.</p>
+                <p class="price">750 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
+                <img src="https://i.imgur.com/izzBCoK.jpg" alt="Поющая чаша">
+                <h3>Поющая чаша</h3>
+                <p>Для медитации и звуковой терапии.</p>
+                <p class="price">2500 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
+                <img src="https://i.imgur.com/QE1keRS.jpg" alt="Набор колокольчиков (7 штук)">
+                <h3>Набор колокольчиков (7 штук)</h3>
+                <p>Для очищения и гармонии.</p>
+                <p class="price">1800 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
                 <img src="https://i.imgur.com/SNPkL3b.jpg" alt="Книга 'Практическая чёрная магия'">
                 <h3>Книга "Практическая чёрная магия"</h3>
-                <p>Классические методы и ритуалы чёрной магии.</p>
+                <p>Классические методы магии.</p>
                 <p class="price">1200 руб.</p>
-                <a href="#" class="buy-button" data-price="1200" data-name="Книга 'Практическая чёрная магия'">В корзину</a>
+                <a href="#" class="buy-button">Купить</a>
             </div>
-            <div class="product" data-category="candles">
+            <div class="product">
+                <img src="https://i.imgur.com/bIucq0r.jpg" alt="Книга 'Диагностика на Таро'">
+                <h3>Книга "Диагностика на Таро"</h3>
+                <p>Гадание и предсказания.</p>
+                <p class="price">1000 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
+                <img src="https://i.imgur.com/OHqS2Z4.jpg" alt="Книга 'Самый полный самоучитель по Таро'">
+                <h3>Книга "Самоучитель по Таро"</h3>
+                <p>Для начинающих гадателей.</p>
+                <p class="price">1100 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
+                <img src="https://i.imgur.com/tjEgsoM.jpg" alt="Книга 'Колдовское Таро'">
+                <h3>Книга "Колдовское Таро"</h3>
+                <p>Открой тайны карт судьбы.</p>
+                <p class="price">1300 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
+                <img src="https://i.imgur.com/SGdIwKo.jpg" alt="Книга 'Руны. Футарк Классический и Арманический'">
+                <h3>Книга "Руны. Футарк"</h3>
+                <p>Классический и арманический футарк.</p>
+                <p class="price">1400 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
                 <img src="https://i.imgur.com/5AAymwF.jpg" alt="Ритуальная свеча (белая)">
                 <h3>Ритуальная свеча (белая)</h3>
-                <p>Восковая свеча для очищения и защиты.</p>
+                <p>Для очищения и защиты.</p>
                 <p class="price">200 руб.</p>
-                <a href="#" class="buy-button" data-price="200" data-name="Ритуальная свеча (белая)">В корзину</a>
+                <a href="#" class="buy-button">Купить</a>
             </div>
-            <div class="product" data-category="decor">
+            <div class="product">
+                <img src="https://i.imgur.com/oLaGzKs.jpg" alt="Подсвечник 'Лотос'">
+                <h3>Подсвечник "Лотос"</h3>
+                <p>Для ритуальных свечей.</p>
+                <p class="price">800 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
                 <img src="https://i.imgur.com/wswLCsX.jpg" alt="Овальная композиция 'Журавли'">
                 <h3>Овальная композиция "Журавли"</h3>
-                <p>Деревянная композиция для медитации.</p>
+                <p>Для медитации и гармонии.</p>
                 <p class="price">1500 руб.</p>
-                <a href="#" class="buy-button" data-price="1500" data-name="Овальная композиция 'Журавли'">В корзину</a>
+                <a href="#" class="buy-button">Купить</a>
             </div>
-            <div class="product" data-category="statues">
+            <div class="product">
+                <img src="https://i.imgur.com/NREF413.jpg" alt="Декоративная тарелка 'Лотосы'">
+                <h3>Декоративная тарелка "Лотосы"</h3>
+                <p>Для алтаря или медитации.</p>
+                <p class="price">1800 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
+                <img src="https://i.imgur.com/D5eYNVL.jpg" alt="Аромалампа 'Фиолетовый узор'">
+                <h3>Аромалампа "Фиолетовый узор"</h3>
+                <p>Для медитации и ритуалов.</p>
+                <p class="price">900 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
+                <img src="https://i.imgur.com/aK5cDny.jpg" alt="Картина 'Горный пейзаж'">
+                <h3>Картина "Горный пейзаж"</h3>
+                <p>Для медитации и гармонии.</p>
+                <p class="price">2000 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
                 <img src="https://i.imgur.com/CTabwqd.jpg" alt="Статуэтка Кришны">
                 <h3>Статуэтка Кришны</h3>
-                <p>Керамическая фигурка для духовности.</p>
+                <p>Для гармонии и духовности.</p>
                 <p class="price">2000 руб.</p>
-                <a href="#" class="buy-button" data-price="2000" data-name="Статуэтка Кришны">В корзину</a>
+                <a href="#" class="buy-button">Купить</a>
             </div>
-            <div class="product" data-category="amulets">
+            <div class="product">
+                <img src="https://i.imgur.com/MYFN1XV.jpg" alt="Статуэтка Ганеши">
+                <h3>Статуэтка Ганеши</h3>
+                <p>Для удачи и мудрости.</p>
+                <p class="price">2200 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
                 <img src="https://i.imgur.com/lmv6wqO.jpg" alt="Талисман богатства">
                 <h3>Талисман богатства</h3>
-                <p>Амулет для привлечения изобилия.</p>
+                <p>Для привлечения изобилия.</p>
                 <p class="price">900 руб.</p>
-                <a href="#" class="buy-button" data-price="900" data-name="Талисман богатства">В корзину</a>
+                <a href="#" class="buy-button">Купить</a>
             </div>
-            <!-- Добавь остальные товары по аналогии -->
+            <div class="product">
+                <img src="https://i.imgur.com/QuFPQzq.jpg" alt="Зеркало Багуа (круглое)">
+                <h3>Зеркало Багуа (круглое)</h3>
+                <p>Для защиты от негатива.</p>
+                <p class="price">1200 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
+                <img src="https://i.imgur.com/KDzCNEp.jpg" alt="Зеркало Багуа (с ручкой)">
+                <h3>Зеркало Багуа (с ручкой)</h3>
+                <p>Для ритуалов защиты.</p>
+                <p class="price">1300 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
+            <div class="product">
+                <img src="https://i.imgur.com/DDyYvR7.jpg" alt="Тыква-горлянка (хулу)">
+                <h3>Тыква-горлянка (хулу)</h3>
+                <p>Для удачи и защиты.</p>
+                <p class="price">1000 руб.</p>
+                <a href="#" class="buy-button">Купить</a>
+            </div>
         </div>
         <div class="pagination" id="pagination"></div>
     </div>
@@ -521,13 +716,13 @@
     <div class="about" id="about">
         <h2>О нас</h2>
         <div class="decor-line"></div>
-        <p><i class="fas fa-book"></i> Мы — команда энтузиастов, вдохновлённых магией и духовными практиками. Наша миссия — помочь вам найти инструменты и знания для пробуждения внутренней силы.</p>
+        <p>Мы — хранители тайн и проводники в мир магии. Каждый предмет в нашем магазине создан с душой, чтобы вдохновлять и пробуждать вашу силу.</p>
     </div>
 
     <div class="delivery" id="delivery">
         <h2>Доставка</h2>
         <div class="decor-line"></div>
-        <p><i class="fas fa-truck"></i> Доставка по всей России: 3-7 дней. Стоимость зависит от региона и рассчитывается при заказе.</p>
+        <p>Доставляем магию по всей России за 3-7 дней. Стоимость зависит от региона.</p>
     </div>
 
     <div class="reviews" id="reviews">
@@ -535,12 +730,16 @@
         <div class="decor-line"></div>
         <div class="review-grid">
             <div class="review">
-                <p>"Качественные товары, быстрая доставка!"</p>
+                <p>"Качество на высоте, доставка быстрая!"</p>
                 <span>— Анна, Москва</span>
             </div>
             <div class="review">
-                <p>"Поющая чаша — это нечто, звук потрясающий."</p>
+                <p>"Поющая чаша — это магия звука."</p>
                 <span>— Сергей, Санкт-Петербург</span>
+            </div>
+            <div class="review">
+                <p>"Книги по Таро — настоящая находка."</p>
+                <span>— Елена, Екатеринбург</span>
             </div>
         </div>
     </div>
@@ -548,9 +747,9 @@
     <div class="contact" id="contact">
         <h2>Контакты</h2>
         <div class="decor-line"></div>
-        <p>Свяжитесь с нами: <a href="mailto:support@ritualshop.ru">support@ritualshop.ru</a></p>
-        <p>Телефон: +7 (999) 123-45-67</p>
-        <a href="mailto:support@ritualshop.ru" class="contact-button">Написать нам</a>
+        <p>Пишите нам: <a href="mailto:support@ritualshop.ru">support@ritualshop.ru</a></p>
+        <p>Звоните: +7 (999) 123-45-67</p>
+        <a href="mailto:support@ritualshop.ru" class="contact-button">Связаться</a>
     </div>
 
     <div class="payment-options">
@@ -559,22 +758,17 @@
         <div class="payment-methods">
             <div class="payment-method">
                 <h3>QIWI</h3>
-                <p>Оплата через QIWI кошелёк.</p>
+                <p>Быстрая оплата через QIWI кошелёк.</p>
             </div>
             <div class="payment-method">
                 <h3>Криптовалюта</h3>
                 <p>Принимаем Bitcoin и Ethereum.</p>
                 <p class="crypto-address">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</p>
             </div>
-        </div>
-    </div>
-
-    <div class="cart-modal" id="cart-modal">
-        <div class="cart-content">
-            <span class="close-cart" id="close-cart">&times;</span>
-            <h3>Ваша корзина</h3>
-            <div id="cart-items"></div>
-            <p>Итого: <span id="cart-total">0 руб.</span></p>
+            <div class="payment-method">
+                <h3>Наличные</h3>
+                <p>Оплата при получении (Москва).</p>
+            </div>
         </div>
     </div>
 
@@ -591,9 +785,7 @@
         const products = document.querySelectorAll('.product');
         const itemsPerPage = 8;
         let currentPage = 1;
-        let cart = [];
 
-        // Пагинация
         function showPage(page) {
             const start = (page - 1) * itemsPerPage;
             const end = start + itemsPerPage;
@@ -626,7 +818,6 @@
             pagination.appendChild(next);
         }
 
-        // Поиск
         const searchInput = document.getElementById('search');
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase();
@@ -636,62 +827,6 @@
                 product.style.display = (title.includes(query) || desc.includes(query)) ? 'block' : 'none';
             });
         });
-
-        // Фильтры
-        const filterButtons = document.querySelectorAll('.filters button');
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                const filter = button.getAttribute('data-filter');
-                products.forEach(product => {
-                    const category = product.getAttribute('data-category');
-                    product.style.display = (filter === 'all' || category === filter) ? 'block' : 'none';
-                });
-                showPage(1);
-            });
-        });
-
-        // Корзина
-        const cartModal = document.getElementById('cart-modal');
-        const openCart = document.getElementById('open-cart');
-        const closeCart = document.getElementById('close-cart');
-        const cartItems = document.getElementById('cart-items');
-        const cartTotal = document.getElementById('cart-total');
-
-        openCart.addEventListener('click', (e) => {
-            e.preventDefault();
-            cartModal.style.display = 'flex';
-            updateCart();
-        });
-
-        closeCart.addEventListener('click', () => {
-            cartModal.style.display = 'none';
-        });
-
-        document.querySelectorAll('.buy-button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                const name = button.getAttribute('data-name');
-                const price = parseInt(button.getAttribute('data-price'));
-                cart.push({ name, price });
-                updateCart();
-                cartModal.style.display = 'flex';
-            });
-        });
-
-        function updateCart() {
-            cartItems.innerHTML = '';
-            let total = 0;
-            cart.forEach(item => {
-                const div = document.createElement('div');
-                div.classList.add('cart-item');
-                div.innerHTML = `<span>${item.name}</span><span>${item.price} руб.</span>`;
-                cartItems.appendChild(div);
-                total += item.price;
-            });
-            cartTotal.textContent = `${total} руб.`;
-        }
 
         showPage(currentPage);
     </script>
