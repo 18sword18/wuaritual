@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Страница не найдена | WuaRitual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+            color: #e6e6e6;
+            line-height: 1.8;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(128, 0, 128, 0.1), transparent 70%);
+            z-index: -1;
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .error-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .error-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+            opacity: 0.2;
+            z-index: -1;
+            animation: starField 50s linear infinite;
+        }
+
+        @keyframes starField {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 1000px; }
+        }
+
+        .error-title {
+            font-family: 'Cinzel', serif;
+            font-size: 72px;
+            color: #ffcc00;
+            text-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .error-message {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #d9d9d9;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            margin-bottom: 20px;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        .telegram-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #800080, #ffcc00);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 15px rgba(128, 0, 128, 0.6);
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        .telegram-link:hover {
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.9);
+            background: linear-gradient(45deg, #ffcc00, #800080);
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            padding: 30px;
+            background: linear-gradient(to top, #1a1a1a, #2c2c2c);
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.7);
+            width: 100%;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #e6b800;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .error-title { font-size: 48px; }
+            .error-message { font-size: 18px; }
+            .telegram-link { padding: 10px 20px; font-size: 14px; }
+        }
+
+        @media (max-width: 480px) {
+            .error-title { font-size: 36px; }
+            .error-message { font-size: 16px; }
+            .telegram-link { padding: 8px 15px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-title">404</h1>
+        <p class="error-message">Увы, эта страница скрыта в тенях магии...</p>
+        <p class="error-message">Если хотите узнать больше о наших товарах или сделать заказ, пишите нам в Telegram.</p>
+        <a href="https://t.me/wuaritual" class="telegram-link">Перейти в Telegram</a>
+    </div>
+
+    <footer>
+        <p>© 2025 WuaRitual. Все права защищены.</p>
+        <p>
+            <a href="#privacy">Политика конфиденциальности</a> |
+            <a href="#terms">Условия использования</a> |
+            <a href="https://t.me/wuaritual"><i class="fab fa-telegram"></i></a>
+        </p>
+    </footer>
+</body>
+</html>
